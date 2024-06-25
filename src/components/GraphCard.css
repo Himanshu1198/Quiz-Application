@@ -1,0 +1,18 @@
+/* https://youtu.be/A_8DSKGWWYI */
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400&display=swap');
+
+.card {
+  width: 300px;
+  height: 425px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  transition: all 0.6s ease;
+}
+
+.card:hover {
+  box-shadow: rgba(255, 172, 28, 0.199) -10px 10px,
+    rgba(255, 172, 28, 0.19) -20px 20px;
+}
