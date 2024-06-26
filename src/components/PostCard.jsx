@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Tilt from 'react-parallax-tilt'
 
-function PostCard({ $id, name, slug, deletebutton, description }) {
+function PostCard({ $id, name, difficulty, slug, deletebutton, description }) {
   const navigate = useNavigate()
   const userData = useSelector((state) => state.auth.userData)
   return (
@@ -57,10 +57,31 @@ function PostCard({ $id, name, slug, deletebutton, description }) {
             {name}
           </h5>
         </a>
+        <div className='my-2'>
+          Difficulty :{' '}
+          <span
+            className={`
+              px-3 py-1 rounded-xl
+              ${
+                difficulty === 'easy'
+                  ? 'bg-green-500'
+                  : difficulty === 'moderate'
+                  ? 'bg-yellow-500'
+                  : 'bg-red-500'
+              }
+              `}
+          >
+            {difficulty}
+          </span>
+        </div>
         <p class='mb-3 font-normal text-gray-700 dark:text-gray-400'>
           {description
-            ? description
-            : 'Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.'}
+            ? description.slice(0, 70)
+            : 'Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.'.split(
+                0,
+                70
+              )}
+          ...
         </p>
         <button
           onClick={() => {

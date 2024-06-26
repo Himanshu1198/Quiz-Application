@@ -25,7 +25,7 @@ function Header() {
       active: !authStatus,
     },
     {
-      name: 'All Quizes',
+      name: 'All Quizzes',
       slug: '/all-quizzes',
       active: authStatus,
     },
@@ -35,11 +35,7 @@ function Header() {
     <header className='py-5'>
       <Container>
         <nav className='flex'>
-          {
-            <div>
-              <ThemeBtn />
-            </div>
-          }
+          <div>{authStatus && <ThemeBtn />}</div>
           <ul className='flex ml-auto'>
             {navItems.map((item) =>
               item.active ? (

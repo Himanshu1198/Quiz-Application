@@ -10,6 +10,7 @@ function PostForm() {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [slug, setSlug] = useState('')
+  const [difficulty, setDiff] = useState('easy')
   const navigate = useNavigate()
   const currUserData = useSelector((state) => state.auth.userData)
 
@@ -35,6 +36,16 @@ function PostForm() {
   const [option3, setOption3] = useState('')
   const [option4, setOption4] = useState('')
 
+  function removeExtraSpaces(input) {
+    // Remove leading and trailing spaces
+    let trimmedInput = input.trim()
+
+    // Replace multiple spaces with a single space
+    let result = trimmedInput.replace(/\s+/g, ' ')
+
+    return result
+  }
+
   const add = () => {
     if (!question || !answer || !option1 || !option2 || !option3 || !option4) {
       alert('Please fill all the fields')
@@ -43,14 +54,14 @@ function PostForm() {
     const id = uuidv4()
     const quizQ = {
       id: id,
-      question: question,
-      answer: answer,
-      explnation: explnation,
+      question: removeExtraSpaces(question),
+      answer: removeExtraSpaces(answer),
+      explnation: removeExtraSpaces(explnation),
       options: {
-        option1: option1,
-        option2: option2,
-        option3: option3,
-        option4: option4,
+        option1: removeExtraSpaces(option1),
+        option2: removeExtraSpaces(option2),
+        option3: removeExtraSpaces(option3),
+        option4: removeExtraSpaces(option4),
       },
     }
     setQuestions([...questions, quizQ])
@@ -96,6 +107,7 @@ function PostForm() {
       const newId = await appWriteServices.createQuiz({
         slug,
         name,
+        difficulty,
         questions,
         status,
         userId: currUserData.$id,
@@ -154,6 +166,20 @@ function PostForm() {
               'shadow-2xl p-3 outline-none rounded-xl my-3 dark:bg-gray-700'
             }
           />
+          <div>
+            <span className='mx-4 ml-10'>Select Difficult</span>
+            <select
+              className='shadow-2xl p-3 outline-none rounded-xl my-3 text-gray-400  dark:bg-gray-700'
+              name=''
+              id=''
+              aria-placeholder='Difficuly'
+              onChange={(e) => setDiff(e.currentTarget.value)}
+            >
+              <option value='easy'>Easy</option>
+              <option value='moderate'>Moderate</option>
+              <option value='high'>Hard</option>
+            </select>
+          </div>
         </div>
         <div className='shadow-2xl rounded-xl my-10 p-5 px-10 bg-gray-100 dark:bg-gray-900'>
           <div className='flex items-center justify-center'>

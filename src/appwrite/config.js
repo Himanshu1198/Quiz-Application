@@ -12,7 +12,7 @@ export class Services {
     this.bucket = new Storage(this.client)
   }
 
-  async createQuiz({ slug, name, questions, status, userId }) {
+  async createQuiz({ slug, name, difficulty, questions, status, userId }) {
     try {
       const Questions = JSON.stringify(questions)
       const id = ID.unique(slug)
@@ -22,6 +22,7 @@ export class Services {
         id,
         {
           name,
+          difficulty,
           Questions,
           status,
           userId,

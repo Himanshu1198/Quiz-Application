@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import appWriteServices from '../appwrite/config'
-import userServices from '../appwrite/auth'
 import { ColorRing } from 'react-loader-spinner'
 import { useSelector } from 'react-redux'
 
@@ -125,7 +124,7 @@ function Post() {
           parsedUsers.push(userObj)
 
           const statObject = {
-            id: post.$id,
+            id: post.name,
             correct: correct,
             incorrect: incorrect,
             incorrectQs: incorrectQs,
@@ -156,10 +155,11 @@ function Post() {
 
   return (
     <div className=''>
-      <div className='flex items-center justify-center mt-10 text-3xl'>
-        <h1 className='text-4xl font-extrabold'>
+      <div className='flex flex-col items-center text-center justify-center mt-10'>
+        <div className='text-4xl font-extrabold'>
           {post ? capitalizeFirstLetter(post.name) : ''}
-        </h1>
+        </div>
+        <div className='text-lg mx-32'>{post ? post.description : ''}</div>
       </div>
       <div>
         {questions.length > 0 ? (
@@ -169,7 +169,7 @@ function Post() {
               key={question.id}
             >
               <div
-                className=' shadow-2xl flex flex-col justify-center items-center w-3/4 mt-10 p-5 rounded-lg'
+                className='shadow-2xl flex flex-col justify-center items-center w-3/4 mt-10 p-5 rounded-lg dark:bg-blue-950'
                 style={{
                   WebkitBoxShadow: '7px 18px 125px -30px rgba(0,0,0,0.75)',
                   MozBoxShadow: '7px 18px 125px -30px rgba(0,0,0,0.75)',
@@ -180,7 +180,7 @@ function Post() {
                   {question.question}
                 </div>
                 <div className='flex gap-32'>
-                  <div className='flex bg-red-200 p-2 pr-3 rounded-3xl'>
+                  <div className='flex bg-red-200 dark:bg-red-600 p-2 pr-3 rounded-3xl'>
                     <input
                       type='radio'
                       name={`question-${question.id}`}
@@ -191,7 +191,7 @@ function Post() {
                     />
                     {question.options.option1}
                   </div>
-                  <div className='flex bg-green-200 p-2 pr-3 rounded-3xl'>
+                  <div className='flex bg-green-200 dark:bg-green-600 p-2 pr-3 rounded-3xl'>
                     <input
                       type='radio'
                       name={`question-${question.id}`}
@@ -202,7 +202,7 @@ function Post() {
                     />
                     {question.options.option2}
                   </div>
-                  <div className='flex  bg-orange-200 p-2 pr-3 rounded-3xl'>
+                  <div className='flex  bg-orange-200 dark:bg-orange-600 p-2 pr-3 rounded-3xl'>
                     <input
                       type='radio'
                       name={`question-${question.id}`}
@@ -213,7 +213,7 @@ function Post() {
                     />
                     {question.options.option3}
                   </div>
-                  <div className='flex  bg-blue-200 p-2 pr-3 rounded-3xl'>
+                  <div className='flex  bg-blue-200 dark:bg-blue-600 p-2 pr-3 rounded-3xl'>
                     <input
                       type='radio'
                       name={`question-${question.id}`}
@@ -247,7 +247,7 @@ function Post() {
           {!result && (
             <button
               onClick={handleSubmit}
-              className='mt-20 bg-red-500 text-white
+              className='my-20 bg-red-500 text-white
               p-3 rounded-2xl font-semibold px-5 hover:bg-red-600'
               style={{
                 WebkitBoxShadow: '11px 11px 45px -6px rgba(255,0,0,1)',
@@ -278,7 +278,7 @@ function Post() {
             onClick={() => {
               navigate('/')
             }}
-            className='p-3 px-6 text-white bg-blue-500 font-semibold rounded-xl'
+            className='mb-20 p-3 px-6 text-white bg-blue-500 font-semibold rounded-xl'
           >
             Go To Home
           </button>
