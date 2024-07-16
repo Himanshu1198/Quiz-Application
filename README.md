@@ -1,6 +1,3 @@
-# Live Link
-https://quiz-application-tan.vercel.app/
-
 # Home 
 ![image](https://github.com/Himanshu1198/Quiz-Application/assets/143578896/e73b6cef-e4e8-4dc7-85ee-08c1c5b00a19)
 
